@@ -37,6 +37,7 @@ class PostDetailTableViewController: UITableViewController {
         
         commentController.addAction(commentOkAction)
         commentController.addAction(commentCancelAction)
+        present(commentController, animated: true, completion: nil)
         
     }
     
