@@ -14,7 +14,7 @@ class Post {
     
     let photoData: Data?
     let timestamp: Date
-    let comments: [Comment]
+    var comments: [Comment]
     var photo: UIImage? {
         guard let data = self.photoData else { return nil }
         return UIImage(data: data)
