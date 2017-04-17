@@ -12,15 +12,64 @@ class PostDetailTableViewController: UITableViewController {
     
     var post: Post?
     
+    @IBOutlet weak var imageViewimage: UIImageView!
+    
+    
+    
+    @IBAction func commentButtonTapped(_ sender: Any) {
+        
+        let commentController = UIAlertController(title: "Comment", message: nil, preferredStyle: .alert)
+        
+        let commentCancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            
+            guard let post = self.post else { return }
+            guard let commentedText = commentController.textFields?.first?.text else { return }
+            
+            PostController.sharedController.addComment(toPost: post, text: commentedText)
+            self.tableView.reloadData()
+        }
+        
+        let commentOkAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        
+        commentController.addTextField { (textField) in
+            textField.placeholder = "Comment Text Here"
+        }
+        
+        commentController.addAction(commentOkAction)
+        commentController.addAction(commentCancelAction)
+        
+    }
+    
+    @IBAction func shareButtonTapped(_ sender: Any) {
+        
+        
+        
+    }
+
+    
+    @IBAction func followButtonTapped(_ sender: Any) {
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 40
+        
+}
+    
+    private func updateViews(){
+        imageViewimage.image = post?.photo
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,25 +79,23 @@ class PostDetailTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 1
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "commentedCell", for: indexPath)
 
-        // Configure the cell...
+        guard let post = post else { return cell }
+        let comment = post.comments[indexPath.row]
+        cell.textLabel?.text = comment.text
+        
+        updateViews()
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

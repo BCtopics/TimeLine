@@ -62,13 +62,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <stackView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" id="Rrp-Jc-mhx">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mo4-JF-73f">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="306"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="375" id="RYf-lA-jW5"/>
+                                    </constraints>
+                                </imageView>
+                                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XPd-JM-F69">
+                                    <rect key="frame" x="0.0" y="306" width="375" height="44"/>
+                                    <items>
+                                        <barButtonItem title="Comment" id="d4e-W6-sFL">
+                                            <connections>
+                                                <action selector="commentButtonTapped:" destination="hjt-sV-dsm" id="ey4-fU-4DR"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem title="Share" id="WSx-uI-xdo">
+                                            <connections>
+                                                <action selector="shareButtonTapped:" destination="hjt-sV-dsm" id="f2J-WE-rHT"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem title="Follow Post" id="0uE-7K-X3I">
+                                            <connections>
+                                                <action selector="followButtonTapped:" destination="hjt-sV-dsm" id="xQi-am-A7i"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </items>
+                                </toolbar>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="Mo4-JF-73f" firstAttribute="top" secondItem="Rrp-Jc-mhx" secondAttribute="top" id="72e-Rd-Jfq"/>
+                                <constraint firstAttribute="trailing" secondItem="Mo4-JF-73f" secondAttribute="trailing" id="U6D-FV-a1f"/>
+                                <constraint firstItem="Mo4-JF-73f" firstAttribute="leading" secondItem="Rrp-Jc-mhx" secondAttribute="leading" id="tbx-cU-7cM"/>
+                            </constraints>
+                        </stackView>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="LB6-kw-mjS">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentedCell" textLabel="UVD-lE-XjY" detailTextLabel="fPk-vi-4Wb" style="IBUITableViewCellStyleSubtitle" id="LB6-kw-mjS">
+                                <rect key="frame" x="0.0" y="378" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LB6-kw-mjS" id="0bi-0v-uCP">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UVD-lE-XjY">
+                                            <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fPk-vi-4Wb">
+                                            <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -77,10 +130,13 @@
                             <outlet property="delegate" destination="hjt-sV-dsm" id="h22-uZ-10x"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="imageViewimage" destination="Mo4-JF-73f" id="UlX-1P-e4W"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJc-Le-rEE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1796" y="50"/>
+            <point key="canvasLocation" x="1796" y="49.925037481259373"/>
         </scene>
         <!--Search Results Table View Controller-->
         <scene sceneID="7hn-vp-0t8">
