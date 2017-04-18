@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Post {
+class Post: SearchableRecord {
     
     //MARK: - Internal Properties
     
@@ -27,6 +27,14 @@ class Post {
         self.photoData = photoData
         self.timestamp = timestamp
         self.comments = comments
+    }
+    
+    
+    //Search Record Function
+
+    func matches(searchTerm: String) -> Bool {
+        let Comments = comments.filter { $0.matches(searchTerm: searchTerm) }
+        return !Comments.isEmpty
     }
     
 }

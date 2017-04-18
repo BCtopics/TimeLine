@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Comment{
+class Comment: SearchableRecord{
     
     //MARK: - Internal Properties
     
@@ -24,6 +24,12 @@ class Comment{
         self.text = text
         self.timestamp = timestamp
         self.post = post
+    }
+    
+    //Search Record Function
+    
+    func matches(searchTerm: String) -> Bool {
+        return text.contains(searchTerm)
     }
     
 }
