@@ -84,6 +84,19 @@ class PostListTableViewController: UITableViewController, UISearchResultsUpdatin
                 detailViewController.post = posts[selectedIndexPath.row]
             }
         }
+        
+        if segue.identifier == "toPostDetailFromSearch" {
+            if let detailViewController = segue.destination as? PostDetailTableViewController,
+                let sender = sender as? PostTableViewCell,
+                let selectedIndexPath = (searchController?.searchResultsController as? SearchResultsTableViewController)?.tableView.indexPath(for: sender),
+                let searchTerm = searchController?.searchBar.text?.lowercased() {
+                
+                let posts = PostController.sharedController.posts.filter({ $0.matches(searchTerm: searchTerm) })
+                let post = posts[selectedIndexPath.row]
+                
+                detailViewController.post = post
+            }
+        }
     }
     
 
