@@ -244,6 +244,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xuo-PQ-CgT">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                                     <state key="normal" title="Add Post"/>
+                                                    <connections>
+                                                        <action selector="addButtonTapped:" destination="tas-uf-BpT" eventType="touchUpInside" id="LuM-bG-DcN"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -264,6 +267,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="0eK-2f-Yfn"/>
                     <connections>
+                        <outlet property="captionTextLabel" destination="be3-ut-EhC" id="pDv-nG-sNM"/>
                         <outlet property="imageViewImage" destination="4qg-7j-CUq" id="UTM-Ns-PH1"/>
                         <outlet property="selectImageButton" destination="kqH-nD-1vM" id="VOz-Wl-KdK"/>
                     </connections>
