@@ -7,8 +7,15 @@
 //
 
 import UIKit
+import CloudKit
 
 class Post: SearchableRecord {
+    
+    //MARK: - Keys
+    
+    static let kType = "Post"
+    static let kPhotoData = "photoData"
+    static let kTimeStamp = "timestamp"
     
     //MARK: - Internal Properties
     
@@ -18,6 +25,21 @@ class Post: SearchableRecord {
     var photo: UIImage? {
         guard let data = self.photoData else { return nil }
         return UIImage(data: data)
+    }
+    
+    var recordType: String { return Post.kType }
+    
+    fileprivate var temporaryPhotoURL: URL {
+        
+        // Must write to temporary directory to be able to pass image file path url to CKAsset
+        
+        let temporaryDirectory = NSTemporaryDirectory()
+        let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
+        let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("jpg")
+        
+        try? photoData?.write(to: fileURL, options: [.atomic])
+        
+        return fileURL
     }
     
     //MARK: - Initializers
@@ -37,4 +59,15 @@ class Post: SearchableRecord {
         return !Comments.isEmpty
     }
     
+}
+
+extension CKRecord {
+    convenience init(_ post: Post){
+    
+    let recordID = CKRecordID(recordName: UUID().uuidString)
+    self.init(recordType: post.recordType, recordID: recordID)
+    
+    self[Post.kPhotoData] = CKAsset(fileURL: post.temporaryPhotoURL)
+    self[Post.kTimeStamp] = post.timestamp as CKRecordValue?
+    }
 }
