@@ -21,6 +21,8 @@
 		6BCD4B071EA5533900B79004 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCD4B061EA5533900B79004 /* Comment.swift */; };
 		6BCD4B0A1EA5549300B79004 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCD4B091EA5549300B79004 /* PostController.swift */; };
 		6BCEB41C1EA564EC00D036D4 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCEB41B1EA564EC00D036D4 /* PostTableViewCell.swift */; };
+		6BF712721EA7F56100573D34 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF712711EA7F56100573D34 /* CloudKitManager.swift */; };
+		6BF712751EA7F67800573D34 /* CloudKitSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF712741EA7F67800573D34 /* CloudKitSyncable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		6BCD4B061EA5533900B79004 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		6BCD4B091EA5549300B79004 /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		6BCEB41B1EA564EC00D036D4 /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		6BF712711EA7F56100573D34 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
+		6BF712741EA7F67800573D34 /* CloudKitSyncable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitSyncable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,8 @@
 			isa = PBXGroup;
 			children = (
 				6B90156F1EA53CEF006DD413 /* AppDelegate.swift */,
+				6BF712731EA7F66700573D34 /* Protocols */,
+				6BF712701EA7F54900573D34 /* OtherControllers */,
 				6B811D101EA6A22000D367C7 /* Protocols */,
 				6BCD4B081EA5548100B79004 /* ModelControllers */,
 				6B90158B1EA540FF006DD413 /* Models */,
@@ -129,6 +135,22 @@
 				6BCEB41B1EA564EC00D036D4 /* PostTableViewCell.swift */,
 			);
 			name = ModelControllers;
+			sourceTree = "<group>";
+		};
+		6BF712701EA7F54900573D34 /* OtherControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6BF712711EA7F56100573D34 /* CloudKitManager.swift */,
+			);
+			name = OtherControllers;
+			sourceTree = "<group>";
+		};
+		6BF712731EA7F66700573D34 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				6BF712741EA7F67800573D34 /* CloudKitSyncable.swift */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,7 +228,9 @@
 			files = (
 				6B811D0F1EA6A1BE00D367C7 /* SearchableRecord.swift in Sources */,
 				6B9015701EA53CEF006DD413 /* AppDelegate.swift in Sources */,
+				6BF712721EA7F56100573D34 /* CloudKitManager.swift in Sources */,
 				6BCD4B0A1EA5549300B79004 /* PostController.swift in Sources */,
+				6BF712751EA7F67800573D34 /* CloudKitSyncable.swift in Sources */,
 				6B9015841EA53EC8006DD413 /* PostListTableViewController.swift in Sources */,
 				6B90158A1EA54047006DD413 /* SearchResultsTableViewController.swift in Sources */,
 				6BCD4B071EA5533900B79004 /* Comment.swift in Sources */,
