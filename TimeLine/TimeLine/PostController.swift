@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class PostController {
     
@@ -18,25 +19,52 @@ class PostController {
     //MARK: - Internal Properties
     
     var posts = [Post]()
+    let cloudKitManager: CloudKitManager
+    
+    //MARK: - Initializers
+    
+    init(){
+        self.cloudKitManager = CloudKitManager()
+    }
     
     //MARK: - CRUD
     
-    func createPostWith(image: UIImage, caption: String){
+    func createPostWith(image: UIImage, caption: String, completion: ((Post) -> Void)?){
         guard let data = UIImageJPEGRepresentation(image, 0.8) else { return }
         
         let post = Post(photoData: data)
-        let _ = addComment(toPost: post, text: caption)
         posts.append(post)
+        let captionComment = addComment(toPost: post, text: caption)
+        
+        
+        cloudKitManager.saveRecord(CKRecord(post)) { (record, error) in
+            guard let record = record else {
+                if let error = error {
+                    NSLog("Error saving new post to CloudKit: \(error)")
+                    return
+                }
+                completion?(post)
+                return
+            }
+            post.cloudKitRecordID = record.recordID
     }
+}
     
-    func addComment(toPost: Post, text: String){
+    func addComment(toPost: Post, text: String, completion: @escaping ((Comment) -> Void) = { _ in }) -> Comment {
+        
         let comment = Comment(text: text, post: toPost)
         toPost.comments.append(comment)
+        
+        cloudKitManager.saveRecord(CKRecord(comment)) { (record, error) in
+            if let error = error {
+                NSLog("Error saving new comment to CloudKit: \(error)")
+                return
+            }
+            comment.cloudKitRecordID = record?.recordID
+            completion(comment)
+        }
+        
+        return comment
     }
-    
-    
-    
-    
-    
     
 }

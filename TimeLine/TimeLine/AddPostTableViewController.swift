@@ -22,8 +22,9 @@ class AddPostTableViewController: UITableViewController, UIImagePickerController
         if let image = image,
             let captionText = captionTextLabel.text {
             
-            PostController.sharedController.createPostWith(image: image, caption: captionText)
-            self.dismiss(animated: true, completion: nil)
+            PostController.sharedController.createPostWith(image: image, caption: captionText) { (_) in
+                self.dismiss(animated: true, completion: nil)
+            }
             
         } else {
             
