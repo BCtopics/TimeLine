@@ -42,6 +42,8 @@ class Post: SearchableRecord {
         return fileURL
     }
     
+    var cloudKitRecordID: CKRecordID?
+    
     //MARK: - Initializers
     
     init(photoData: Data?, timestamp: Date = Date(), comments: [Comment] = [Comment]()){
