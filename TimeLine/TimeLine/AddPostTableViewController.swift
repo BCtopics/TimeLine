@@ -15,32 +15,6 @@ class AddPostTableViewController: UITableViewController, UIImagePickerController
     @IBOutlet weak var captionTextLabel: UITextField!
     
     @IBAction func selectImageButtonTapped(_ sender: Any) {
-        
-//        imageViewImage.image = #imageLiteral(resourceName: "dog")
-//        selectImageButton.setTitle("", for: .normal)
-        
-//        let imagePickerController = UIImagePickerController()
-//        
-//        let alertController = UIAlertController(title: "Please select a photo", message: nil, preferredStyle: .actionSheet)
-//        
-//        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-//            alertController.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (_) -> Void in
-//                imagePicker.sourceType = .photoLibrary
-//                self.present(imagePicker, animated: true, completion: nil)
-//            }))
-//        }
-//        
-//        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-//            alertController.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) -> Void in
-//                imagePicker.sourceType = .camera
-//                self.present(imagePicker, animated: true, completion: nil)
-//            }))
-//        }
-//        
-//        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//        
-//        present(alertController, animated: true, completion: nil)
-        
     }
     
     @IBAction func addButtonTapped(_ sender: Any) {
