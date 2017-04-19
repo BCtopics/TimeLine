@@ -310,6 +310,10 @@
         <scene sceneID="Wsb-4a-fe3">
             <objects>
                 <viewController id="Xxj-o8-Cz3" customClass="PhotoSelectViewController" customModule="TimeLine" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="U3m-2C-dCh"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cvh-fg-tFP"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="beF-zo-FGU">
                         <rect key="frame" x="0.0" y="0.0" width="359" height="283.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -321,7 +325,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="359" height="283.5"/>
                                 <state key="normal" title="Select Image"/>
                                 <connections>
-                                    <action selector="imageButtonTapped:" destination="Xxj-o8-Cz3" eventType="touchUpInside" id="MYE-Fs-tGk"/>
+                                    <action selector="imageButtonTapped" destination="Xxj-o8-Cz3" eventType="touchUpInside" id="1u3-KH-8H0"/>
                                     <action selector="selectImageButtonTapped:" destination="tas-uf-BpT" eventType="touchUpInside" id="7XI-cd-hr6"/>
                                 </connections>
                             </button>

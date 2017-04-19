@@ -8,8 +8,9 @@
 
 import UIKit
 
-class AddPostTableViewController: UITableViewController, UIImagePickerControllerDelegate {
+class AddPostTableViewController: UITableViewController, UIImagePickerControllerDelegate, PhotoSelectViewControllerDelegate {
     
+    var image: UIImage?
     @IBOutlet weak var selectImageButton: UIButton!
     @IBOutlet weak var imageViewImage: UIImageView!
     @IBOutlet weak var captionTextLabel: UITextField!
@@ -35,4 +36,15 @@ class AddPostTableViewController: UITableViewController, UIImagePickerController
         
     }
     
+    func photoSelectViewControllerSelected(image: UIImage) {
+        self.image = image
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "imageSegue" {
+            
+            let embedViewController = segue.destination as? PhotoSelectViewController
+            embedViewController?.delegate = self
+        }
+    }
 }

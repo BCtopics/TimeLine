@@ -42,9 +42,7 @@ class PostDetailTableViewController: UITableViewController {
     }
     
     @IBAction func shareButtonTapped(_ sender: Any) {
-        
-        
-        
+        presentActivityViewController()
     }
 
     
@@ -55,9 +53,16 @@ class PostDetailTableViewController: UITableViewController {
     }
     
     
-    
-    
-    
+    func presentActivityViewController() {
+        
+        guard let photo = post?.photo,
+            let comment = post?.comments.first else { return }
+        
+        let text = comment.text
+        let activityViewController = UIActivityViewController(activityItems: [photo, text], applicationActivities: nil)
+        
+        present(activityViewController, animated: true, completion: nil)
+    }
     
 
     override func viewDidLoad() {

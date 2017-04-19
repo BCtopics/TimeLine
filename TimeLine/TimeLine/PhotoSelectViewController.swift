@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhotoSelectViewController: UIViewController {
+class PhotoSelectViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,9 +19,12 @@ class PhotoSelectViewController: UIViewController {
 
     @IBOutlet weak var selectedImage: UIButton!
     
-    @IBAction func imageButtonTapped(_ sender: Any) {
+    weak var delegate: PhotoSelectViewControllerDelegate?
+    
+    @IBAction func imageButtonTapped() {
         
         let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
         
         let alert = UIAlertController(title: "Select Photo Location", message: nil, preferredStyle: .actionSheet)
         
@@ -45,6 +48,17 @@ class PhotoSelectViewController: UIViewController {
         
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            
+            delegate?.photoSelectViewControllerSelected(image: image)
+            selectedImage.setTitle("", for: UIControlState())
+            imageView.image = image
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -61,4 +75,8 @@ class PhotoSelectViewController: UIViewController {
     }
     */
 
+}
+
+protocol PhotoSelectViewControllerDelegate: class {
+    func photoSelectViewControllerSelected(image: UIImage)
 }
