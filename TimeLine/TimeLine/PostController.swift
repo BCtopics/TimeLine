@@ -20,6 +20,9 @@ class PostController {
     
     var posts = [Post]()
     let cloudKitManager: CloudKitManager
+    var comments: [Comment] {
+        return posts.flatMap { $0.comments }
+    }
     
     //MARK: - Initializers
     
@@ -65,6 +68,27 @@ class PostController {
         }
         
         return comment
+    }
+    
+    // MARK: - Helper Fetches
+    
+    private func recordsOf(type: String) -> [CloudKitSyncable] {
+        switch type {
+        case "Post":
+            return posts.flatMap { $0 as? CloudKitSyncable }
+        case "Comment":
+            return comments.flatMap { $0 as CloudKitSyncable }
+        default:
+            return []
+        }
+    }
+    
+    func syncedRecordsOf(type: String) -> [CloudKitSyncable] {
+        return recordsOf(type: type).filter { $0.isSynced }
+    }
+    
+    func unsyncedRecordsOf(type: String) -> [CloudKitSyncable] {
+        return recordsOf(type: type).filter { !$0.isSynced }
     }
     
 }
