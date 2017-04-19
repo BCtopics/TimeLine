@@ -11,8 +11,7 @@ import UIKit
 class AddPostTableViewController: UITableViewController, UIImagePickerControllerDelegate, PhotoSelectViewControllerDelegate {
     
     var image: UIImage?
-    @IBOutlet weak var selectImageButton: UIButton!
-    @IBOutlet weak var imageViewImage: UIImageView!
+
     @IBOutlet weak var captionTextLabel: UITextField!
     
     @IBAction func selectImageButtonTapped(_ sender: Any) {
@@ -20,7 +19,7 @@ class AddPostTableViewController: UITableViewController, UIImagePickerController
     
     @IBAction func addButtonTapped(_ sender: Any) {
         
-        if let image = imageViewImage.image,
+        if let image = image,
             let captionText = captionTextLabel.text {
             
             PostController.sharedController.createPostWith(image: image, caption: captionText)
