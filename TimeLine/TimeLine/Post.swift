@@ -53,6 +53,19 @@ class Post: SearchableRecord {
         self.comments = comments
     }
     
+    // MARK: CloudKitSyncable
+    
+    convenience required init?(record: CKRecord) {
+        
+        guard let timestamp = record.creationDate,
+            let photoAsset = record[Post.kPhotoData] as? CKAsset else { return nil }
+        
+        let photoData = try? Data(contentsOf: photoAsset.fileURL)
+        self.init(photoData: photoData, timestamp: timestamp)
+        cloudKitRecordID = record.recordID
+    }
+
+    
     
     //Search Record Function
 
@@ -73,3 +86,5 @@ extension CKRecord {
     self[Post.kTimeStamp] = post.timestamp as CKRecordValue?
     }
 }
+
+
