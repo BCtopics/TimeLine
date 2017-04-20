@@ -12,12 +12,31 @@ class PostListTableViewController: UITableViewController, UISearchResultsUpdatin
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        requestSync()
+        
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(postsDidChange(_:)), name: PostController.PostsChangedNotification, object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
+    
+    @IBAction func refreshButtonTapped(_ sender: Any) {
+        
+        requestSync {
+            self.refreshControl?.endRefreshing()
+        }
+        
+    }
+    
+    func postsDidChange(_ notification: Notification) {
+        tableView.reloadData()
+    }
+    
+    
     var searchController: UISearchController?
     
     private func setUpSearchController() {
@@ -71,6 +90,18 @@ class PostListTableViewController: UITableViewController, UISearchResultsUpdatin
         }    
     }
     */
+    
+    private func requestSync(_ completion: (() -> Void)? = nil) {
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+        PostController.sharedController.performFullSync {
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            
+            completion?()
+        }
+    }
 
     // MARK: - Navigation
 

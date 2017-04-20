@@ -23,6 +23,7 @@
 		6BCEB41C1EA564EC00D036D4 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCEB41B1EA564EC00D036D4 /* PostTableViewCell.swift */; };
 		6BF712721EA7F56100573D34 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF712711EA7F56100573D34 /* CloudKitManager.swift */; };
 		6BF712751EA7F67800573D34 /* CloudKitSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF712741EA7F67800573D34 /* CloudKitSyncable.swift */; };
+		6BF712791EA866DD00573D34 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF712781EA866DD00573D34 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,8 @@
 		6BCEB41B1EA564EC00D036D4 /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		6BF712711EA7F56100573D34 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		6BF712741EA7F67800573D34 /* CloudKitSyncable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitSyncable.swift; sourceTree = "<group>"; };
+		6BF712761EA866CD00573D34 /* TimeLine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeLine.entitlements; sourceTree = "<group>"; };
+		6BF712781EA866DD00573D34 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BF712791EA866DD00573D34 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +74,7 @@
 			children = (
 				6B90156E1EA53CEF006DD413 /* TimeLine */,
 				6B90156D1EA53CEF006DD413 /* Products */,
+				6BF712771EA866DD00573D34 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,6 +89,7 @@
 		6B90156E1EA53CEF006DD413 /* TimeLine */ = {
 			isa = PBXGroup;
 			children = (
+				6BF712761EA866CD00573D34 /* TimeLine.entitlements */,
 				6B90156F1EA53CEF006DD413 /* AppDelegate.swift */,
 				6BF712731EA7F66700573D34 /* Protocols */,
 				6BF712701EA7F54900573D34 /* OtherControllers */,
@@ -153,6 +159,14 @@
 			name = Protocols;
 			sourceTree = "<group>";
 		};
+		6BF712771EA866DD00573D34 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6BF712781EA866DD00573D34 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -185,8 +199,19 @@
 				TargetAttributes = {
 					6B90156B1EA53CEE006DD413 = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = CTJ2VR37F9;
+						DevelopmentTeam = N8EMAYLL43;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -361,10 +386,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = CTJ2VR37F9;
+				CODE_SIGN_ENTITLEMENTS = TimeLine/TimeLine.entitlements;
+				DEVELOPMENT_TEAM = N8EMAYLL43;
 				INFOPLIST_FILE = TimeLine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bradleygilmore.TimeLine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bradleygilmore.TimeLinev1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -374,10 +401,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = CTJ2VR37F9;
+				CODE_SIGN_ENTITLEMENTS = TimeLine/TimeLine.entitlements;
+				DEVELOPMENT_TEAM = N8EMAYLL43;
 				INFOPLIST_FILE = TimeLine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bradleygilmore.TimeLine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bradleygilmore.TimeLinev1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

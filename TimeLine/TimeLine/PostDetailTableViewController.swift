@@ -10,6 +10,23 @@ import UIKit
 
 class PostDetailTableViewController: UITableViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 40
+        
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(postDidChange(_:)), name: PostController.PostCommentsChangedNotification, object: nil)
+        
+    }
+    
+    func postDidChange(_ notification: Notification) {
+        guard let notificationPost = notification.object as? Post,
+            let post = post, notificationPost === post else { return } // Not our post
+        updateViews()
+    }
+    
     var post: Post?
     
     @IBOutlet weak var imageViewimage: UIImageView!
@@ -63,15 +80,6 @@ class PostDetailTableViewController: UITableViewController {
         
         present(activityViewController, animated: true, completion: nil)
     }
-    
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 40
-        
-}
     
     private func updateViews(){
         imageViewimage.image = post?.photo
