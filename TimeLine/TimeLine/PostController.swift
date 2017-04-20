@@ -60,7 +60,9 @@ class PostController {
                 completion?(post)
                 return
             }
+            
             post.cloudKitRecordID = record.recordID
+            completion?(post)
     }
 }
     

@@ -13,7 +13,7 @@ class Post: SearchableRecord {
     
     //MARK: - Keys
     
-    static let kType = "Post"
+    static let kType = "post"
     static let kPhotoData = "photoData"
     static let kTimeStamp = "timestamp"
     

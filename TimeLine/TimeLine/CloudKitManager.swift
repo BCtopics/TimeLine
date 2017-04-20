@@ -27,63 +27,88 @@ class CloudKitManager {
     // MARK: - User Info Discovery
     
     func fetchLoggedInUserRecord(_ completion: ((_ record: CKRecord?, _ error: Error? ) -> Void)?) {
+        //This will fetch a UsersRecord that is already logged in.
         
         CKContainer.default().fetchUserRecordID { (recordID, error) in
+            //^^ Takes in a recordID to pass into the fetchRecord function below.
             
             if let error = error,
                 let completion = completion {
                 completion(nil, error)
-            }
+            }//^^ Checks if there is an error, If so calls the completion with nil and the given error.
             
             if let recordID = recordID,
                 let completion = completion {
+                //^^ Checks to make sure both recordID and completion are unwrapped.
                 
                 self.fetchRecord(withID: recordID, completion: completion)
+                //^^Calls the fetchRecord function (Gavin's Section) and passses in the recordID and completion from above.
             }
         }
     }
     
     func fetchUsername(for recordID: CKRecordID,
                        completion: @escaping ((_ givenName: String?, _ familyName: String?) -> Void) = { _,_ in }) {
+        //^^ This fetches a particular username from a recordID
         
         let recordInfo = CKUserIdentityLookupInfo(userRecordID: recordID)
+                            //^^ This is something you call when you'd like to fetch specific users from information you already have about them. In this example we have the recordID of the user so we are searching for his userRecordID to find that specific user. This could also take in an email address, or phone number.
+        
         let operation = CKDiscoverUserIdentitiesOperation(userIdentityLookupInfos: [recordInfo])
+                        //^^ This uses the information we got from the CKUserIdentityLookupInfo to actually perform the operation to get that information.
         
         var userIdenties = [CKUserIdentity]()
+        //^^ This creates an instance of a array of CKUserIdentity's. A CKUserIdentity is a specific refference to a user.
         operation.userIdentityDiscoveredBlock = { (userIdentity, _) in
+            //^^ This block is called when the operation completes.
             userIdenties.append(userIdentity)
+            //^^ This appends the users identity to the userIdenties array above.
         }
         operation.discoverUserIdentitiesCompletionBlock = { (error) in
             if let error = error {
                 NSLog("Error getting username from record ID: \(error)")
                 completion(nil, nil)
                 return
+                //^^ This block is called when the operation completes. This checks for any errors and logs them to the console. Also returns a completion with nil values.
             }
             
             let nameComponents = userIdenties.first?.nameComponents
+            //^^ This gets the first/last name of the user from the userIdenties array above.
             completion(nameComponents?.givenName, nameComponents?.familyName)
+                    //^^ This passes the first and last name of the user to the completion.
         }
         
         CKContainer.default().add(operation)
+        //This adds all that information from the above operation constant to the default container.
     }
     
     func fetchAllDiscoverableUsers(completion: @escaping ((_ userInfoRecords: [CKUserIdentity]?) -> Void) = { _ in }) {
         
         let operation = CKDiscoverAllUserIdentitiesOperation()
+        //^^ this is a operation that finds all discoverable users in the device’s contacts.
         
         var userIdenties = [CKUserIdentity]()
+        //^^ This creates an instance of a array of CKUserIdentity's. A CKUserIdentity is a specific refference to a user.
+
         operation.userIdentityDiscoveredBlock = { userIdenties.append($0) }
+        //^^ This block will execute once for each user identity returned. This will append that user to the userIdenties array above.
+        
         operation.discoverAllUserIdentitiesCompletionBlock = { error in
+            //^^This is executed after all of the individual userIdentityDiscoveredBlocks but before the operation’s completion block.
             if let error = error {
                 NSLog("Error discovering all user identies: \(error)")
                 completion(nil)
                 return
+                //^^ This block is called when the operation completes. This checks for any errors and logs them to the console. Also returns a completion with a nil value.
             }
             
             completion(userIdenties)
+            //^^ Sends the userIdenties array above to the completion userInfoRecords.
         }
         
         CKContainer.default().add(operation)
+        //This adds all that information from the above operation constant to the default container.
+        
     }
     
     
